@@ -1,10 +1,15 @@
 package com.spring.practice.Spring_Practice;
 
+import java.util.Scanner;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.objenesis.instantiator.basic.NewInstanceInstantiator;
 
 import com.spring.practice.Spring_Practice.student.Student;
+import com.spring.practice.Spring_Practrice.Dao.Dao;
+import com.spring.practice.Spring_Practrice.Dao.StudentDao;
 
 /**
  * Hello world!
@@ -12,16 +17,10 @@ import com.spring.practice.Spring_Practice.student.Student;
  */
 public class App {
 	public static void main(String[] args) {
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("com/spring/practice/Spring_Practice/student/student_confug.xml");
-		
-		JdbcTemplate j = (JdbcTemplate)applicationContext.getBean("jdbc", JdbcTemplate.class);
-		
+		Student student = new StudentDao().getStudent(3);
+		System.out.println(student);
 		
 		
-		String q = "insert into student(id, name, address) values(?,?,?)";
-		
-		int res =   j.update(q, 1, "Md Toufique Husein", "Mohakhali, Dhala");
-		
-		System.out.println(res);
+		System.out.println(new StudentDao().getStudents());
 	}
 }
